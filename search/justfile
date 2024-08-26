@@ -1,0 +1,28 @@
+up:
+  docker compose up -d
+
+down:
+  docker compose down
+
+health:
+  vespa status deploy --wait 300
+
+deploy:
+  vespa deploy --wait 300 app
+
+feed-single:
+  vespa feed vespa-single.jsonl
+
+feed-all:
+  vespa feed vespa-all.jsonl --target http://localhost:8080
+
+query-single:
+  vespa query -v 'yql=select * from entries where id=4012'
+
+query-all:
+  vespa query -v 'yql=select * from entries where true'
+
+query-userquery-design:
+  vespa query \
+    'yql=select * from entries where userQuery()' \
+    'query=design'

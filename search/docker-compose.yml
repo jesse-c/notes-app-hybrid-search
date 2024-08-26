@@ -1,0 +1,7 @@
+services:
+  vespa:
+    image: vespaengine/vespa:8.399.59
+    ports:
+      - "8080:8080"
+      - "19071:19071"
+      - "19092:19092"

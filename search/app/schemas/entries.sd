@@ -1,0 +1,20 @@
+schema entries {
+  document entries {
+     field id type string {
+        indexing: summary | attribute
+        attribute: fast-search
+     }
+     field title type string {
+        indexing: index | summary
+        index: enable-bm25
+     }
+     field body type string {
+        indexing: index | summary
+        index: enable-bm25
+     }
+  }
+
+  fieldset default {
+    fields: title, body
+  }
+}

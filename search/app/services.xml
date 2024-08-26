@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<services version="1.0" xmlns:deploy="vespa" xmlns:preprocess="properties">
+  <container id="default" version="1.0">
+    <search></search>
+    <document-api></document-api>
+    <nodes>
+      <node hostalias='node1'></node>
+    </nodes>
+  </container>
+
+  <content id="notes-app" version="1.0">
+    <min-redundancy>2</min-redundancy>
+    <documents>
+      <document type="entries" mode="index"/>
+    </documents>
+    <nodes>
+      <node hostalias="node1" distribution-key="0" />
+    </nodes>
+  </content>
+</services>
