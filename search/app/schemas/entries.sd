@@ -12,9 +12,24 @@ schema entries {
         indexing: index | summary
         index: enable-bm25
      }
+     field body_embedding type tensor<float>(d0[384]) {
+        indexing: attribute | index
+        attribute {
+          distance-metric: dotproduct
+        }
+     }
   }
 
   fieldset default {
     fields: title, body
   }
+
+    rank-profile embedding_similarity inherits default {
+      inputs {
+        query(query_embedding) tensor<float>(d0[384])
+      }
+      first-phase {
+        expression: closeness(field, body_embedding)
+      }
+    }
 }
