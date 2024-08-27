@@ -24,6 +24,12 @@ schema entries {
     fields: title, body
   }
 
+    rank-profile bm25 inherits default {
+      first-phase {
+          expression: bm25(title) + bm25(body)
+      }
+    }
+
     rank-profile embedding_similarity inherits default {
       inputs {
         query(query_embedding) tensor<float>(d0[384])
