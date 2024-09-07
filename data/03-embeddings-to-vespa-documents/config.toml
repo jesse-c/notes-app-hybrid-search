@@ -1,0 +1,3 @@
+[data]
+input_file = "input/embeddings.parquet"
+output_file = "output/vespa-all.jsonl"
