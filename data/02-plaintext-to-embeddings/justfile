@@ -1,2 +1,5 @@
-run:
+bootstrap:
+  mkdir -p {input,output}
+
+run: bootstrap
   poetry run python main.py

@@ -7,5 +7,5 @@ float_format = "%.8f"
 batch_size = 256
 
 [data]
-input_file = "sentences.txt"
-output_file = "embeddings.txt"
+input_file = "input/sentences.txt"
+output_file = "output/embeddings.txt"
