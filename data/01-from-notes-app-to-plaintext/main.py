@@ -1,9 +1,9 @@
-import tomllib
 import csv
 from pathlib import Path
 
-from tqdm import tqdm
 import structlog
+import tomllib
+from tqdm import tqdm
 
 log = structlog.get_logger()
 

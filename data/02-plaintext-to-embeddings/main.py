@@ -1,9 +1,12 @@
-import numpy as np
+import csv
+from pathlib import Path
+
+import pyarrow as pa
+import pyarrow.parquet as pq
+import structlog
 import tomllib
 from sentence_transformers import SentenceTransformer
 from tqdm import tqdm
-
-import structlog
 
 log = structlog.get_logger()
 
@@ -13,38 +16,52 @@ with open("config.toml", "rb") as f:
     config = tomllib.load(f)
 log.debug("config", status="loaded")
 
-# Read sentences from input file
-log.debug("sentences", status="loading")
-with open(config["data"]["input_file"], "r") as f:
-    sentences = f.readlines()
-log.debug("sentences", status="loaded")
-
-# Remove any leading/trailing whitespace
-log.debug("sentences", status="stripping")
-sentences = [s.strip() for s in sentences]
-log.debug("sentences", status="stripped")
-
 log.debug("model", status="loading")
 model = SentenceTransformer(config["model"]["name"])
 log.debug("model", status="loaded")
 
+
+input_file = Path(config["data"]["input_file"])
+output_file = Path(config["data"]["output_file"])
+
 log.debug("embeddings", status="generating")
-embeddings = []
+with input_file.open("r") as infile:
+    reader = csv.reader(infile)
+    actual_headers = next(reader)
 
-for i in tqdm(range(0, len(sentences), config["embedding"]["batch_size"])):
-    batch = sentences[i : i + config["embedding"]["batch_size"]]
-    batch_embeddings = model.encode(batch)
-    embeddings.extend(np.array(batch_embeddings))
+    # Find column indices
+    id_index = actual_headers.index("id")
+    title_index = actual_headers.index("title")
+    body_index = actual_headers.index("body")
 
+    # Prepare data for Parquet
+    ids = []
+    titles = []
+    bodies = []
+    body_embeddings = []
+
+    for row in tqdm(reader):
+        ids.append(row[id_index])
+        titles.append(row[title_index])
+        bodies.append(row[body_index])
+        body_embedding = model.encode(row[body_index])
+        body_embeddings.append(body_embedding)
 log.debug("embeddings", status="generated")
 
-
-# Save embeddings to a file without scientific notation
-log.debug("embeddings", status="saving")
-np.savetxt(
-    config["data"]["output_file"],
-    embeddings,
-    delimiter=config["embedding"]["delimiter"],
-    fmt=config["embedding"]["float_format"],
+# Create PyArrow Table
+log.debug("table", status="generating")
+table = pa.Table.from_arrays(
+    [
+        pa.array(ids),
+        pa.array(titles),
+        pa.array(bodies),
+        pa.array(body_embeddings),
+    ],
+    names=["id", "title", "body", "body_embedding"],
 )
-log.debug("embeddings", status="save")
+log.debug("table", status="generated")
+
+# Write to Parquet file
+log.debug("table", status="writing")
+pq.write_table(table, output_file)
+log.debug("table", status="wrote")

@@ -1,11 +1,6 @@
 [model]
 name = "sentence-transformers/msmarco-MiniLM-L-6-v3"
 
-[embedding]
-delimiter = ","
-float_format = "%.8f"
-batch_size = 256
-
 [data]
-input_file = "input/sentences.txt"
-output_file = "output/embeddings.txt"
+input_file = "input/notes.csv"
+output_file = "output/embeddings.parquet"
