@@ -1,0 +1,19 @@
+Note Primary Key
+Note ID
+Pinned?
+Owning Account Name
+Owning Folder Name
+Modify By Device
+Cloudkit Creator Record ID
+Title
+Creation Time
+Modify Time
+Note Plaintext
+Is Password protected
+Crypto Interations
+Crypto Salt (hex)
+Crypto Tag (hex)
+Crypto Key (hex)
+Crypto IV (hex)
+Encrypted Data (hex)
+UUID

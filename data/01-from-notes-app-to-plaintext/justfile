@@ -1,0 +1,8 @@
+bootstrap:
+  mkdir -p {input,output}
+
+headers-generate:
+  xsv headers --just-names input/csv/note_store_notes_1.csv > headers.txt
+
+run:
+  poetry run python main.py
