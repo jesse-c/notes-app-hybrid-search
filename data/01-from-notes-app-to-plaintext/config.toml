@@ -1,4 +1,4 @@
 [data]
 headers_file = "headers.txt"
 input_file = "input/csv/note_store_notes_1.csv"
-output_file = "output/notes.txt"
+output_file = "output/notes.csv"
