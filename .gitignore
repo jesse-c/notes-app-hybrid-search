@@ -3,6 +3,10 @@ data/**/input
 data/**/output
 
 # Search
+# TODO
+
+# Examples
+data/example-news
 
 # Dev
 .idea
