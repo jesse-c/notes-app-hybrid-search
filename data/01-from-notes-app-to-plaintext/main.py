@@ -21,6 +21,7 @@ output_file = Path(config["data"]["output_file"])
 
 with input_file.open("r") as infile:
     total_notes = sum(1 for line in infile) - 1
+    log.info(f"total notes: {total_notes}")
 
 
 with input_file.open("r") as infile, output_file.open("w") as outfile:
@@ -45,26 +46,23 @@ with input_file.open("r") as infile, output_file.open("w") as outfile:
     plaintext_index = actual_headers.index("Note Plaintext")
 
     # Write header to output file
-    writer.writerow(["id", "title", "sentence"])
+    writer.writerow(["id", "title", "body"])
 
-    log.info(f"total notes: {total_notes}")
-
-    total_sentences = 1
+    actual_total_notes = 0
 
     # Process each note
     for row in tqdm(reader, total=total_notes):
         try:
             id = row[note_id_index]
             title = row[title_index]
-            plaintext = row[plaintext_index]
+            body = row[plaintext_index]
 
-            # Split plaintext into sentences and write to output
-            for sentence in plaintext.split("\n"):
-                if sentence.strip():  # Only write non-empty sentences
-                    total_sentences = total_sentences + 1
-                    writer.writerow([id, title, sentence.strip()])
+            if body.strip():  # Only write non-empty notes
+                actual_total_notes = actual_total_notes + 1
+
+                writer.writerow([id, title, body])
         except IndexError:
             log.error("Unexpected row format", row=row)
             continue
 
-    log.info(f"total sentences: {total_sentences}")
+    log.info(f"actual total notes: {actual_total_notes}")
