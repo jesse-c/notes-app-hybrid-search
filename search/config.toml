@@ -1,0 +1,2 @@
+[model]
+name = "sentence-transformers/msmarco-MiniLM-L-6-v3"

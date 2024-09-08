@@ -24,18 +24,27 @@ schema entries {
     fields: title, body
   }
 
-    rank-profile bm25 inherits default {
-      first-phase {
-          expression: bm25(title) + bm25(body)
-      }
+  rank-profile bm25 inherits default {
+    first-phase {
+        expression: bm25(title) + bm25(body)
     }
+  }
 
-    rank-profile embedding_similarity inherits default {
-      inputs {
-        query(query_embedding) tensor<float>(d0[384])
-      }
-      first-phase {
-        expression: closeness(field, body_embedding)
-      }
+  rank-profile embedding_similarity inherits default {
+    inputs {
+      query(query_embedding) tensor<float>(d0[384])
     }
+    first-phase {
+      expression: closeness(field, body_embedding)
+    }
+  }
+
+  rank-profile hybrid inherits default {
+    inputs {
+      query(query_embedding) tensor<float>(d0[384])
+    }
+    first-phase {
+      expression: 0.5 * (bm25(title) + bm25(body)) + 0.5 * closeness(field, body_embedding)
+    }
+  }
 }
