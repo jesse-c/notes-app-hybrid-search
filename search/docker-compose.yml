@@ -5,3 +5,10 @@ services:
       - "8080:8080"
       - "19071:19071"
       - "19092:19092"
+    volumes:
+      - vespa-var:/var:/opt/vespa/var
+      - vespa-logs:/opt/vespa/logs
+
+volumes:
+  vespa-var:
+  vespa-logs:
