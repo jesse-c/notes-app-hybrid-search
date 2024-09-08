@@ -1,7 +1,5 @@
 # Data
 
-## Process
-
 Follow ordered directories.
 
 # Search
@@ -10,6 +8,7 @@ Follow ordered directories.
 
 - `just up`
 - `just health`
-- `just feed-single`
+- `just deploy`
+- `just feed*` (any)
 - `just query*` (any)
 - `just down`
