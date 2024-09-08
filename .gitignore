@@ -3,7 +3,8 @@ data/**/input
 data/**/output
 
 # Search
-# TODO
+search/vespa-single.jsonl
+search/vespa-all.jsonl
 
 # Examples
 data/example-news
@@ -11,4 +12,3 @@ data/example-news
 # Dev
 .idea
 .aider*
-
