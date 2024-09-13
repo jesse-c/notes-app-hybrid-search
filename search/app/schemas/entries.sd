@@ -12,12 +12,13 @@ schema entries {
         indexing: index | summary
         index: enable-bm25
      }
-     field body_embedding type tensor<float>(d0[384]) {
-        indexing: attribute | index
-        attribute {
-          distance-metric: dotproduct
-        }
-     }
+  }
+
+  field body_embedding type tensor<float>(d0[384]) {
+    indexing: input body | embed hf-embedder | attribute | index
+    attribute {
+        distance-metric: dotproduct
+    }
   }
 
   fieldset default {
