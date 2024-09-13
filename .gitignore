@@ -5,6 +5,7 @@ data/**/output
 # Search
 search/vespa-single.jsonl
 search/vespa-all.jsonl
+search/app/models
 
 # Examples
 data/example-news

@@ -1,0 +1,8 @@
+bootstrap:
+  mkdir output
+
+clean:
+  rm -rf output
+
+run:
+  poetry run python main.py
