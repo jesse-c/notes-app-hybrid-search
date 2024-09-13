@@ -7,6 +7,10 @@
     <nodes>
       <node hostalias='node1'></node>
     </nodes>
+    <component id="hf-embedder" type="hugging-face-embedder">
+      <transformer-model path="models/model.onnx"/>
+      <tokenizer-model path="models/tokenizer.json"/>
+    </component>
   </container>
 
   <content id="notes-app" version="1.0">

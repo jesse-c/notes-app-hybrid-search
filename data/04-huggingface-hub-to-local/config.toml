@@ -1,2 +1,5 @@
 [model]
 name = "Snowflake/snowflake-arctic-embed-xs"
+
+[data]
+output_dir = "output"
