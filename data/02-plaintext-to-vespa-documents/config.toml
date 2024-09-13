@@ -3,4 +3,4 @@ name = "Snowflake/snowflake-arctic-embed-xs"
 
 [data]
 input_file = "input/notes.csv"
-output_file = "output/embeddings.parquet"
+output_file = "output/vespa-all.jsonl"
