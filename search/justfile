@@ -1,3 +1,5 @@
+default: up health deploy feed-all query-cli-all
+
 up:
   docker compose up -d
 
@@ -37,14 +39,17 @@ query-cli-bm25:
     'ranking.profile=bm25' \
     'hits=10'
 
+query-py-hybrid query:
+  poetry run python main.py query hybrid {{query}}
+
 # Example: photography
-query-py-semantic:
+query-py-semantic-example:
   poetry run python main.py query semantic photography
 
 # Example: design
-query-py-bm25:
+query-py-bm25-example:
   poetry run python main.py query bm25 design
 
 # Example: design
-query-py-hybrid:
+query-py-hybrid-example:
   poetry run python main.py query hybrid photography

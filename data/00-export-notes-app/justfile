@@ -1,0 +1,4 @@
+[working-directory: '/Users/jesse/src/github.com/threeplanetssoftware/apple_cloud_notes_parser/']
+n00-to-n01:
+  rm -rf output
+  ruby notes_cloud_ripper.rb -m /Users/jesse/Library/Group\ Containers/group.com.apple.notes/ --individual-files -o output --one-output-folder

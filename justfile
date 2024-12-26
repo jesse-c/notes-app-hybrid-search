@@ -1,3 +1,6 @@
+install:
+  poetry install --no-root
+
 data-to-search:
   cp data/02-plaintext-to-vespa-documents/output/vespa-all.jsonl search/vespa-all.jsonl
 

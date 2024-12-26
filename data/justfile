@@ -1,0 +1,6 @@
+step-00-to-step-01:
+  rm -rf ~/src/github.com/jesse-c/notes-app-hybrid-search/data/01-from-notes-app-to-plaintext/input/*
+  cp -r ~/src/github.com/threeplanetssoftware/apple_cloud_notes_parser/output/notes_rip/ ~/src/github.com/jesse-c/notes-app-hybrid-search/data/01-from-notes-app-to-plaintext/input/
+
+step-01-to-step-02:
+  cp 01-from-notes-app-to-plaintext/output/notes.csv 02-plaintext-to-vespa-documents/input/notes.csv

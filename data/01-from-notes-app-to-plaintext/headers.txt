@@ -9,6 +9,7 @@ Title
 Creation Time
 Modify Time
 Note Plaintext
+Widget Snippet
 Is Password protected
 Crypto Interations
 Crypto Salt (hex)
