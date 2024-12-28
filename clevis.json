@@ -1,0 +1,27 @@
+{
+  "data-to-search-path": {
+    "value": "data/02-plaintext-to-vespa-documents/output/vespa-all.jsonl",
+    "a": {
+      "link": [
+        {
+          "type": "path",
+          "value": "data/02-plaintext-to-vespa-documents/"
+        },
+        {
+          "type": "toml",
+          "file": "data/02-plaintext-to-vespa-documents/config.toml",
+          "key": "data.output_file"
+        }
+      ]
+    },
+    "b": {
+      "link": [
+        {
+          "type": "span",
+          "file": "justfile",
+          "key": "5:6-64"
+        }
+      ]
+    }
+  }
+}

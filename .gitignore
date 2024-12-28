@@ -13,3 +13,4 @@ data/example-news
 # Dev
 .idea
 .aider*
+*.pyc
